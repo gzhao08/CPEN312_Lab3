@@ -4,7 +4,6 @@ use ieee.numeric_std.all;
 
 entity display_controller is
     port(
-        second_clk : in std_logic;
         hr_in : in unsigned(3 downto 0);
         min_in : in unsigned(5 downto 0);
         sec_in : in unsigned(5 downto 0);
@@ -107,5 +106,7 @@ S5: BCDto7seg
             BCD => sec0,
             DISPLAY  => sec_out0
         );
+
+
 
 end Behavioral;

@@ -3,12 +3,9 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 
 entity second_pulse is
-    generic (
-        BOARD : integer := 0  -- 0 = basys3, 1 = DE1-SoC
-    );
     port(
         default_clk : in std_logic;
         second_clk : out std_logic
@@ -17,11 +14,9 @@ end second_pulse;
 
 architecture Behavioral of second_pulse is
 
-constant TOTAL_COUNT : integer := 
-    100000000 when BOARD = 0 else
-    50000000;
+constant TOTAL_COUNT : integer := 50000000;
 
-signal counter : std_logic_vector(0 to 23) := (others => '0');
+signal counter : unsigned(25 downto 0) := (others => '0');
 
 begin
 
@@ -38,13 +33,6 @@ begin
 end process;
 
 -- tick the second hand every half cycle
-process(counter)
-begin
-    if (counter <= TOTAL_COUNT/2-1) then
-        second_clk <= '1';
-    else 
-        second_clk <= '0';
-    end if;
-end process;
+second_clk <= '1' when (counter <= TOTAL_COUNT/2-1) else '0';
 
 end Behavioral;
