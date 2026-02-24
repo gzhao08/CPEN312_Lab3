@@ -95,25 +95,28 @@ begin
                 time_sec <= time_sec + "000001";
             end if;
             
-            -- changing the time
-            if (write_en = '1') then
-                if (write_sel = '0') then
-                    -- update time
-                    time_hr <= hour_in;
-                    time_min <= minute_in;
-                    time_sec <= second_in;
-                    time_AMPM <= AMPM_in;
-                else
-                    -- update alarm
-                    alarm_hr <= hour_in;
-                    alarm_min <= minute_in;
-                    alarm_sec <= second_in;
-                    alarm_AMPM <= AMPM_in;
-                end if;
-            end if;
+            
             
         end if;
-    end if;
+		  
+		  -- changing the time
+		  if (write_en = '1') then
+				 if (write_sel = '0') then
+					  -- update time
+					  time_hr <= hour_in;
+					  time_min <= minute_in;
+					  time_sec <= second_in;
+					  time_AMPM <= AMPM_in;
+				 else
+					  -- update alarm
+					  alarm_hr <= hour_in;
+					  alarm_min <= minute_in;
+					  alarm_sec <= second_in;
+					  alarm_AMPM <= AMPM_in;
+				 end if;
+			end if;	
+		 
+	 end if;
 end process;
 
 alarm_active <= '1' when
